@@ -47,4 +47,4 @@ py .\manage.py createsuperuser
 ### Admin
 
 user:leopo
-pass:12345
+pass: 12345
