@@ -1,0 +1,29 @@
+{% extends "layouts/main.html"%}
+{% block contenido %}
+
+<h1>Nuevo post</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {% if post is not None %}
+        <input type="hidden" name="id" value="{{post.id}}">
+    {% endif %}
+    <div class="form-group my-3">
+        <label>Titulo</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo"
+        {% if post is not None %}
+            value="{{post.title}}"
+        {% endif %}
+        >
+    </div>
+    <div class="form-group my-3">
+        <label>Texto</label>
+        <textarea class="form-control" id="texto" name="texto" placeholder="Escribe aquíqui">{% if post is not None %}{{post.text}}{% endif %}</textarea>
+        <button type="submit" class="btn btn-primary my-3">Enviar</button>
+        <!-- <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo"> -->
+    </div>
+    <!-- <input type="text" name="titulo" placeholder="Titulo"> -->
+    <!-- <input type="text" name="contenido" placeholder="Contenido"> -->
+    <!-- <input type="submit" value="Enviar"> -->
+</form>
+
+{% endblock %} 

@@ -18,19 +18,46 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
                         </li>
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="/post">Nuevo Post</a>
                         </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#">Disabled</a>
                         </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Cerrar sesión</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Iniciar sesión</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
         </header>
 
 
         <main role="main" class="container my-5">
             <div class="py-4">
+                {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{message}} 
+                    </div>
+                    {% endif %}
+                    {% if message.tags == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{message}}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
                 {% block contenido %} {% endblock %}
             </div>
         </main>
